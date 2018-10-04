@@ -32,8 +32,8 @@ class UserController {
         * @param  {Number} id id of object
         */
         const { id } = req.params;
-        const query = { include: [{ model: model.groups }] };
         const model = await Promise.resolve(modelPromise);
+        const query = { include: [{ model: model.groups }] };
         const result = await model.users.findById(id, query);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
