@@ -1,8 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 const modelPromise = require('../database').model;
 const response = require('../helpers/Response');
 const service = require('../helpers/Service');
+
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+});
+
+let upload = multer({ storage });
 
 class ProductController {
 
@@ -11,6 +24,7 @@ class ProductController {
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getById);
         this.router.post('/', this.create);
+        this.router.post('/upload', upload.single('image'), this.upload);
         this.router.patch('/:id', this.update);
         this.router.delete('/soft/:id', this.softDelete);
         this.router.delete('/:id', this.delete);
@@ -79,6 +93,12 @@ class ProductController {
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
         }
+    }
+
+    async upload(req, res) {
+        const { file, headers: { host } } = req;
+        if (!file) return await response.push(res, { status: 400, result: 'ต้องมีอย่างน้อย 1 ไฟล์' }, 401);
+        return await response.push(res, { status: 200, result: host + '/' + file.path }, 200);
     }
 }
 
