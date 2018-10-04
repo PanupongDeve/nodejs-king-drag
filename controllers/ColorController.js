@@ -4,7 +4,7 @@ const modelPromise = require('../database').model;
 const response = require('../helpers/Response');
 const service = require('../helpers/Service');
 
-class UserController {
+class ColorController {
 
     constructor() {
         this.router = router;
@@ -21,7 +21,7 @@ class UserController {
         * Get all
         */
         const model = await Promise.resolve(modelPromise);
-        const result = await model.users.findAll();
+        const result = await model.colors.findAll();
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
 
@@ -32,15 +32,14 @@ class UserController {
         */
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
-        const result = await model.users.findById(id);
+        const result = await model.colors.findById(id);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
 
     async create(req, res) {
         const model = await Promise.resolve(modelPromise);
         try {
-            if (req.body.password) req.body.password = await service.encrpytPassword(req.body.password)
-            const result = await model.users.create(req.body);
+            const result = await model.colors.create(req.body);
             return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -51,7 +50,7 @@ class UserController {
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.users.update(req.body, { where: { id } });
+            const result = await model.colors.update(req.body, { where: { id } });
             return await response.push(res, { status: result ? 200 : 400, result: result ? 'Successful' : 'Failure' }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -62,7 +61,7 @@ class UserController {
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.users.update({ softDelete: 1 }, { where: { id } });
+            const result = await model.colors.update({ softDelete: 1 }, { where: { id } });
             return await response.push(res, { status: result ? 200 : 400, result: result ? 'Successful' : 'Failure' }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -73,7 +72,7 @@ class UserController {
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.users.destroy(id);
+            const result = await model.colors.destroy(id);
             return await response.push(res, { status: result ? 200 : 400, result: result ? 'Successful' : 'Failure' }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -81,4 +80,4 @@ class UserController {
     }
 }
 
-module.exports = new UserController().router;
+module.exports = new ColorController().router;

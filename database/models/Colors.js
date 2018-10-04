@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(191),
             allowNull: true
         },
+        softDelete: {
+            field: 'soft_delete',
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
         createdAt: {
             field: 'created_at',
             type: DataTypes.DATE,

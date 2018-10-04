@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 
 const AuthController = require('./AuthController');
 const UserController = require('./UserController');
+const ColorController = require('./ColorController');
 
 class Controller {
 
@@ -20,6 +21,7 @@ class Controller {
 
         this.app.use('/api/users', UserController)
         this.app.use('/api/authentication', AuthController)
+        this.app.use('/api/colors', ColorController)
     }
 }
 
