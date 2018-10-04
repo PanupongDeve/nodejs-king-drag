@@ -62,6 +62,7 @@ class Database {
         await model.products.sync();
         await model.orders.sync();
         await model.orderProduct.sync();
+        await model.userGroup.sync();
     }
 
 
