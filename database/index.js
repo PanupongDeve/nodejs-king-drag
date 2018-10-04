@@ -41,6 +41,7 @@ class Database {
 
         model.users = require('./models/Users')(sequelize, DataTypes);
         model.colors = require('./models/Colors')(sequelize, DataTypes);
+        model.sizes = require('./models/Sizes')(sequelize, DataTypes);
 
         await this.mountSyncTable(model);
         await this.mountModelRelations(model);
@@ -50,6 +51,7 @@ class Database {
     async mountSyncTable(model) {
         await model.users.sync();
         await model.colors.sync();
+        await model.sizes.sync();
     }
 
 
