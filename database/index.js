@@ -47,6 +47,7 @@ class Database {
         model.orders = require('./models/Orders')(sequelize, DataTypes);
 
         model.orderProduct = require('./models/orderProduct')(sequelize, DataTypes);
+        model.userGroup = require('./models/userGroup')(sequelize, DataTypes);
 
         await this.mountSyncTable(model);
         await this.mountModelRelations(model);
@@ -73,6 +74,9 @@ class Database {
 
         model.orders.belongsToMany(model.products, { through: { model: model.orderProduct } });
         model.products.belongsToMany(model.orders, { through: { model: model.orderProduct } });
+
+        model.users.belongsToMany(model.groups, { through: { model: model.userGroup } });
+        model.groups.belongsToMany(model.users, { through: { model: model.userGroup } });
     }
 }
 
