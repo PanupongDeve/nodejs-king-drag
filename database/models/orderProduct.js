@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         discount: {
-            field: 'diacount',
+            field: 'discount',
             type: DataTypes.INTEGER(10),
             allowNull: true
         },
