@@ -96,9 +96,9 @@ class ProductController {
     }
 
     async upload(req, res) {
-        const { file, headers: { host } } = req;
+        const { file } = req;
         if (!file) return await response.push(res, { status: 400, result: 'ต้องมีอย่างน้อย 1 ไฟล์' }, 401);
-        return await response.push(res, { status: 200, result: host + '/' + file.path }, 200);
+        return await response.push(res, { status: 200, result: '/' + file.path }, 200);
     }
 }
 
