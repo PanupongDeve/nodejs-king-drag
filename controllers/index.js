@@ -5,6 +5,7 @@ const UserController = require('./UserController');
 const ColorController = require('./ColorController');
 const SizeController = require('./SizeController');
 const GroupController = require('./GroupController');
+const ProductController = require('./ProductController');
 
 class Controller {
 
@@ -26,6 +27,7 @@ class Controller {
         this.app.use('/api/colors', ColorController);
         this.app.use('/api/sizes', SizeController);
         this.app.use('/api/groups', GroupController);
+        this.app.use('/api/products', ProductController);
     }
 }
 

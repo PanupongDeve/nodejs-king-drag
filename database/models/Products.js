@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         colorId: {
             field: 'color_id',
             type: DataTypes.INTEGER(10),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isInt: true
             }
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         sizeId: {
             field: 'size_id',
             type: DataTypes.INTEGER(10),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isInt: true
             }
@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
         priceA: {
             field: 'price_A',
             type: DataTypes.DECIMAL(10, 2),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isDecimal: true
             }
@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
         priceB: {
             field: 'price_B',
             type: DataTypes.DECIMAL(10, 2),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isDecimal: true
             }
