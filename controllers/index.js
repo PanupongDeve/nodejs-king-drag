@@ -4,6 +4,7 @@ const AuthController = require('./AuthController');
 const UserController = require('./UserController');
 const ColorController = require('./ColorController');
 const SizeController = require('./SizeController');
+const GroupController = require('./GroupController');
 
 class Controller {
 
@@ -20,10 +21,11 @@ class Controller {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
-        this.app.use('/api/users', UserController)
-        this.app.use('/api/authentication', AuthController)
-        this.app.use('/api/colors', ColorController)
-        this.app.use('/api/sizes', SizeController)
+        this.app.use('/api/users', UserController);
+        this.app.use('/api/authentication', AuthController);
+        this.app.use('/api/colors', ColorController);
+        this.app.use('/api/sizes', SizeController);
+        this.app.use('/api/groups', GroupController);
     }
 }
 
