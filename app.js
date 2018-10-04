@@ -33,6 +33,5 @@ module.exports = class App {
         await this.mountDatabase();
         await this.mountMiddleware();
         await this.mountController();
-        
     }
 }
