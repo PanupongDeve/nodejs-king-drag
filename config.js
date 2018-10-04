@@ -12,8 +12,8 @@ module.exports = class Config {
         */
         this.address = '167.99.77.10';
         this.port = 6440;
-        this.username = 'crp';
-        this.password = 'www.google.com';
+        this.username = 'root';
+        this.password = 'password';
         this.database = 'crp';
     }
 
@@ -22,7 +22,7 @@ module.exports = class Config {
          * Get database host address
          */
         if (this.env === 'production') return this.address;
-        else return '167.99.77.10';
+        else return 'localhost';
     }
 
     getPort() {
@@ -30,7 +30,7 @@ module.exports = class Config {
          * Get port 
          */
         if (this.env === 'production') return this.port;
-        else return 3000;
+        else return 3001;
     }
 
     getUsername() {
@@ -38,7 +38,7 @@ module.exports = class Config {
          * Get username
          */
         if (this.env === 'production') return this.username;
-        else return 'kingdrag';
+        else return 'root';
     }
 
     getPassword() {
@@ -46,7 +46,7 @@ module.exports = class Config {
          * Get password 
          */
         if (this.env === 'production') return this.username;
-        else return 'www.google.com';
+        else return 'password';
     }
 
     getDatabase() {

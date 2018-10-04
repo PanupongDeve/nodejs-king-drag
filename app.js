@@ -31,7 +31,8 @@ module.exports = class App {
             console.log('\x1b[31m', 'System:', '\x1b[37m', `Running \x1b[32m${this.config.getAddress()}\x1b[37m Server on port \x1b[32m${this.port}\x1b[37m`)
         });
         await this.mountDatabase();
-        await this.mountController();
         await this.mountMiddleware();
+        await this.mountController();
+        
     }
 }
