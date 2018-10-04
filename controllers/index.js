@@ -1,3 +1,5 @@
+const middleware = require('../middlewares');
+
 const AuthController = require('./AuthController');
 const UserController = require('./UserController');
 const ColorController = require('./ColorController');
@@ -5,6 +7,7 @@ const SizeController = require('./SizeController');
 const GroupController = require('./GroupController');
 const ProductController = require('./ProductController');
 const OrderController = require('./OrderController');
+
 
 class Controller {
 
@@ -19,8 +22,8 @@ class Controller {
     initialController() {
         console.log('\x1b[31m', 'System:', '\x1b[37m', 'Initial Controller has been established successfully.');
 
-        this.app.use('/api/users', UserController);
         this.app.use('/api/authentication', AuthController);
+        this.app.use('/api/users', middleware.accessProtection, UserController);
         this.app.use('/api/colors', ColorController);
         this.app.use('/api/sizes', SizeController);
         this.app.use('/api/groups', GroupController);

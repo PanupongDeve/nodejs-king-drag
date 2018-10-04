@@ -21,12 +21,25 @@ class Service {
         }
     }
 
-    async generateToken(emp) {
+    async generateToken(user) {
         return await this.jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1),
-            employeeId: emp.id,
-            roleId: emp.roleId
+            userId: user.id,
+            group: user.group
         }, 'p@sSw0rd');
+    }
+
+    async verifyToken(token) {
+        try {
+            const result = await this.jwt.verify(token, 'p@sSw0rd');
+            return await result ? true : false;
+        } catch (ex) {
+            return await false;
+        }
+    }
+
+    async decodeToken(token) {
+        return await this.jwt.decode(token);
     }
 }
 
