@@ -18,5 +18,8 @@
 		"nodemon": "^1.18.4",
 		"path": "^0.12.7",
 		"sequelize": "^4.39.0"
+	},
+	"scripts": {
+		"dev": "nodemon index.js"
 	}
 }

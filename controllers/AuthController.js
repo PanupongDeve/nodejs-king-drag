@@ -8,6 +8,7 @@ class AuthController {
     constructor() {
         this.router = router;
         this.router.post('/', this.authen);
+        this.router.get('/refreshToken', this.refershToken);
     }
 
     async authen(req, res) {
@@ -19,6 +20,18 @@ class AuthController {
         if (!isCorrectPassword) return await response.push(res, { status: 400, result: 'invalid email, password' }, 400);
         const token = await service.generateToken(user);
         return await response.push(res, { status: 200, result: { user, token } }, 200);
+    }
+
+    async refershToken(req, res) {
+        try {
+            const { token } = req.query;
+           if(!token) throw "invalid token";
+           const newToken = await service.refershToken(token);
+           return await response.push(res, { status: 200, result: { token: newToken } }, 200);
+        } catch (error) {
+            console.log(error)
+            response.push(res, { status: 400, result: error }, 400);
+        }
     }
 }
 

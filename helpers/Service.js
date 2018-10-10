@@ -24,9 +24,24 @@ class Service {
     async generateToken(user) {
         return await this.jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1),
-            userId: user.id,
+            userId: user.id || user.userId,
             group: user.group
         }, 'p@sSw0rd');
+    }
+
+    async refershToken(token) {
+       try {
+        const now = Math.floor(Date.now() / 1000);
+        const result = await this.jwt.verify(token, 'p@sSw0rd');
+        if(now < result.exp) {
+            return token;
+        } else {
+            return await this.generateToken(result);
+        }
+        
+       } catch (error) {
+           throw error;
+       } 
     }
 
     async verifyToken(token) {
