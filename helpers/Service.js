@@ -31,13 +31,9 @@ class Service {
 
     async refershToken(token) {
        try {
-        const now = Math.floor(Date.now() / 1000);
         const result = await this.jwt.verify(token, 'p@sSw0rd');
-        if(now < result.exp) {
-            return token;
-        } else {
-            return await this.generateToken(result);
-        }
+        const newToken = await this.generateToken(result);
+        return newToken;
         
        } catch (error) {
            throw error;
