@@ -26,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
                 isInt: true
             }
         },
+        modelId: {
+            field: 'model_id',
+            type: DataTypes.INTEGER(10),
+            allowNull: false,
+            validate: {
+                isInt: true
+            }
+        },
         colorId: {
             field: 'color_id',
             type: DataTypes.INTEGER(10),
@@ -95,6 +103,9 @@ module.exports = (sequelize, DataTypes) => {
             indexes: [
                 {
                     fields: ['group_id']
+                },
+                {
+                    fields: ['model_id']
                 },
                 {
                     fields: ['color_id']
