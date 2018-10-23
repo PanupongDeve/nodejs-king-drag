@@ -76,7 +76,7 @@ class Database {
         model.orders.belongsTo(model.users);
 
         model.groups.hasMany(model.models);
-        model.models.belongsTo(model.models);
+        model.models.belongsTo(model.groups);
 
         model.orders.belongsToMany(model.products, { through: { model: model.orderProduct } });
         model.products.belongsToMany(model.orders, { through: { model: model.orderProduct } });

@@ -4,7 +4,7 @@ const modelPromise = require('../database').model;
 const response = require('../helpers/Response');
 const service = require('../helpers/Service');
 
-class SizeController {
+class GroupController {
 
     constructor() {
         this.router = router;
@@ -21,7 +21,8 @@ class SizeController {
         * Get all
         */
         const model = await Promise.resolve(modelPromise);
-        const result = await model.groups.findAll();
+        const query = { include: [{ model: model.models }] }
+        const result = await model.groups.findAll(query);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
 
@@ -32,7 +33,8 @@ class SizeController {
         */
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
-        const result = await model.groups.findById(id);
+        const query = { include: [{ model: model.models }] }
+        const result = await model.groups.findById(id, query);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
 
@@ -80,4 +82,4 @@ class SizeController {
     }
 }
 
-module.exports = new SizeController().router;
+module.exports = new GroupController().router;
