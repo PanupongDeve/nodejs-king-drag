@@ -18,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         code: {
             field: 'code',
             type: DataTypes.STRING(191),
-            allowNull: false,
-            unique: 'compositeIndex'
+            allowNull: false
         },
         title: {
             field: 'title',

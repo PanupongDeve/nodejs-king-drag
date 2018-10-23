@@ -7,17 +7,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             autoIncrement: true
         },
-        code: {
-            field: 'code',
-            type: DataTypes.STRING(191),
-            allowNull: false,
-            unique: 'compositeIndex'
-        },
-        title: {
-            field: 'title',
-            type: DataTypes.STRING(191),
-            allowNull: true
-        },
         groupId: {
             field: 'group_id',
             type: DataTypes.INTEGER(10),

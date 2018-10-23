@@ -35,7 +35,7 @@ class ProductController {
         * Get all
         */
         const model = await Promise.resolve(modelPromise);
-        const query = { include: [{ model: model.groups }, { model: model.colors }, { model: model.sizes }] };
+        const query = { include: [{ model: model.groups }, { model: model.models }, { model: model.colors }, { model: model.sizes }] };
         const result = await model.products.findAll(query);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
