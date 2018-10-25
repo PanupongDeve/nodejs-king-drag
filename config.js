@@ -30,7 +30,7 @@ module.exports = class Config {
          * Get port 
          */
         if (this.env === 'production') return this.port;
-        else return 3001;
+        else return 3003;
     }
 
     getUsername() {

@@ -96,7 +96,8 @@ class ProductController {
     }
 
     async upload(req, res) {
-        const { file } = req;
+        let  { file } = req;
+        file.path = file.path.substring(7); //  --> to cut /public
         if (!file) return await response.push(res, { status: 400, result: 'ต้องมีอย่างน้อย 1 ไฟล์' }, 401);
         return await response.push(res, { status: 200, result: '/' + file.path }, 200);
     }
