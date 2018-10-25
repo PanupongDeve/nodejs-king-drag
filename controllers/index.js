@@ -7,6 +7,7 @@ const SizeController = require('./SizeController');
 const GroupController = require('./GroupController');
 const ProductController = require('./ProductController');
 const OrderController = require('./OrderController');
+const ModelController = require('./ModelController');
 
 
 class Controller {
@@ -29,6 +30,7 @@ class Controller {
         this.app.use('/api/groups', middleware.accessProtection, GroupController);
         this.app.use('/api/products', middleware.accessProtection, ProductController);
         this.app.use('/api/orders', middleware.accessProtection, OrderController);
+        this.app.use('/api/models', middleware.accessProtection, ModelController);
     }
 }
 

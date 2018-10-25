@@ -1,30 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
 const modelPromise = require('../database').model;
 const response = require('../helpers/Response');
 const service = require('../helpers/Service');
 
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/images')
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
-});
-
-let upload = multer({ storage });
-
-class ProductController {
+class ModelController {
 
     constructor() {
         this.router = router;
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getById);
         this.router.post('/', this.create);
-        this.router.post('/upload', upload.single('image'), this.upload);
         this.router.patch('/:id', this.update);
         this.router.delete('/soft/:id', this.softDelete);
         this.router.delete('/:id', this.delete);
@@ -35,8 +21,8 @@ class ProductController {
         * Get all
         */
         const model = await Promise.resolve(modelPromise);
-        const query = { include: [{ model: model.groups }, { model: model.models }, { model: model.colors }, { model: model.sizes }] };
-        const result = await model.products.findAll(query);
+        const query = { include: [{ model: model.groups }] }
+        const result = await model.models.findAll(query);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
 
@@ -47,15 +33,15 @@ class ProductController {
         */
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
-        const query = { include: [{ model: model.groups }, { model: model.colors }, { model: model.sizes }] };
-        const result = await model.products.findById(id, query);
+        const query = { include: [{ model: model.groups }] }
+        const result = await model.models.findById(id, query);
         return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
     }
 
     async create(req, res) {
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.products.create(req.body);
+            const result = await model.models.create(req.body);
             return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -66,7 +52,7 @@ class ProductController {
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.products.update(req.body, { where: { id } });
+            const result = await model.models.update(req.body, { where: { id } });
             return await response.push(res, { status: result ? 200 : 400, result: result ? 'Successful' : 'Failure' }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -77,7 +63,7 @@ class ProductController {
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.products.update({ softDelete: 1 }, { where: { id } });
+            const result = await model.models.update({ softDelete: 1 }, { where: { id } });
             return await response.push(res, { status: result ? 200 : 400, result: result ? 'Successful' : 'Failure' }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
@@ -88,19 +74,12 @@ class ProductController {
         const { id } = req.params;
         const model = await Promise.resolve(modelPromise);
         try {
-            const result = await model.products.destroy(id);
+            const result = await model.models.destroy(id);
             return await response.push(res, { status: result ? 200 : 400, result: result ? 'Successful' : 'Failure' }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
         }
     }
-
-    async upload(req, res) {
-        let  { file } = req;
-        file.path = file.path.substring(7); //  --> to cut /public
-        if (!file) return await response.push(res, { status: 400, result: 'ต้องมีอย่างน้อย 1 ไฟล์' }, 401);
-        return await response.push(res, { status: 200, result: '/' + file.path }, 200);
-    }
 }
 
-module.exports = new ProductController().router;
+module.exports = new ModelController().router;

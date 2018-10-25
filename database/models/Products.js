@@ -7,19 +7,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             autoIncrement: true
         },
-        code: {
-            field: 'code',
-            type: DataTypes.STRING(191),
-            allowNull: false,
-            unique: 'compositeIndex'
-        },
-        title: {
-            field: 'title',
-            type: DataTypes.STRING(191),
-            allowNull: true
-        },
         groupId: {
             field: 'group_id',
+            type: DataTypes.INTEGER(10),
+            allowNull: false,
+            validate: {
+                isInt: true
+            }
+        },
+        modelId: {
+            field: 'model_id',
             type: DataTypes.INTEGER(10),
             allowNull: false,
             validate: {
@@ -95,6 +92,9 @@ module.exports = (sequelize, DataTypes) => {
             indexes: [
                 {
                     fields: ['group_id']
+                },
+                {
+                    fields: ['model_id']
                 },
                 {
                     fields: ['color_id']

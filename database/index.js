@@ -45,6 +45,7 @@ class Database {
         model.groups = require('./models/Groups')(sequelize, DataTypes);
         model.products = require('./models/Products')(sequelize, DataTypes);
         model.orders = require('./models/Orders')(sequelize, DataTypes);
+        model.models = require('./models/Models')(sequelize, DataTypes);
 
         model.orderProduct = require('./models/orderProduct')(sequelize, DataTypes);
         model.userGroup = require('./models/userGroup')(sequelize, DataTypes);
@@ -63,6 +64,7 @@ class Database {
         await model.orders.sync();
         await model.orderProduct.sync();
         await model.userGroup.sync();
+        await model.models.sync();
     }
 
 
@@ -72,6 +74,11 @@ class Database {
         model.products.belongsTo(model.sizes);
 
         model.orders.belongsTo(model.users);
+
+        model.groups.hasMany(model.models);
+        model.models.belongsTo(model.groups);
+
+        model.products.belongsTo(model.models);
 
         model.orders.belongsToMany(model.products, { through: { model: model.orderProduct } });
         model.products.belongsToMany(model.orders, { through: { model: model.orderProduct } });
