@@ -51,6 +51,8 @@ class GroupController {
 
     async createUserGroup(req, res) {
         const model = await Promise.resolve(modelPromise);
+        const exist = await model.userGroup.findAll({ where: { groupId: req.body.groupId, userId: req.body.userId } });
+        if (exist && !!exist.length) return await response.push(res, { status: 400, result: 'duplicate data' }, 400);
         try {
             const result = await model.userGroup.create(req.body);
             return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
