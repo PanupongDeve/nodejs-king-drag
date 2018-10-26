@@ -11,6 +11,7 @@ class GroupController {
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getById);
         this.router.post('/', this.create);
+        this.router.post('/users/', this.createUserGroup);
         this.router.patch('/:id', this.update);
         this.router.delete('/soft/:id', this.softDelete);
         this.router.delete('/:id', this.delete);
@@ -42,6 +43,16 @@ class GroupController {
         const model = await Promise.resolve(modelPromise);
         try {
             const result = await model.groups.create(req.body);
+            return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
+        } catch (ex) {
+            return await response.push(res, { status: 400, result: ex }, 400);
+        }
+    }
+
+    async createUserGroup(req, res) {
+        const model = await Promise.resolve(modelPromise);
+        try {
+            const result = await model.userGroup.create(req.body);
             return await response.push(res, { status: result ? 200 : 400, result }, result ? 200 : 400);
         } catch (ex) {
             return await response.push(res, { status: 400, result: ex }, 400);
