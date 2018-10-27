@@ -11,9 +11,9 @@ module.exports = class Config {
         * @param  {String} database Host database name
         */
         this.address = '167.99.77.10';
-        this.port = 6440;
+        this.port = process.env.PORT;
         this.username = 'kingdrag';
-        this.password = 'password';
+        this.password = 'www.google.com';
         this.database = 'kingdrag';
     }
 

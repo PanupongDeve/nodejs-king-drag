@@ -21,6 +21,14 @@
 	},
 	"scripts": {
 		"start": "node index.js",
-		"dev": "nodemon index.js"
+		"dev": "nodemon index.js",
+		"server-delete": "rm -rf node_modules",
+		"server-install": "npm install",
+		"server-prod": "npm run server-delete && npm run server-install",
+		"client-clean": "npm run client-delete --prefix client/material",
+		"client-install": "npm install --prefix client/material",
+		"client-build": "npm run build --prefix client/material",
+		"client-prod": "npm run client-clean && npm run client-install && npm run client-build",
+		"deploy": "npm run client-prod && npm run server-prod && npm run start"
 	}
 }
