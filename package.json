@@ -25,6 +25,7 @@
 		"server-delete": "rm -rf node_modules",
 		"server-install": "npm install",
 		"server-prod": "npm run server-delete && npm run server-install",
+		"client-download": "git submodule init && git submodule update",
 		"client-clean": "npm run client-delete --prefix client/material",
 		"client-install": "npm install --prefix client/material",
 		"client-build": "npm run build --prefix client/material",
