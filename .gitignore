@@ -41,6 +41,7 @@ typings/
 
 .env
 
+
 *.DS_Store
 
 public/images
