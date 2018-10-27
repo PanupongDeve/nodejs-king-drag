@@ -1,4 +1,5 @@
 const middleware = require('../middlewares');
+const path = require('path');
 
 const AuthController = require('./AuthController');
 const UserController = require('./UserController');
@@ -14,6 +15,7 @@ class Controller {
 
     constructor() {
         this.app = null;
+        this.rootPath = __dirname.split('/controllers')[0];
     }
 
     initialApp(app) {
@@ -31,6 +33,9 @@ class Controller {
         this.app.use('/api/products', middleware.accessProtection, ProductController);
         this.app.use('/api/orders', middleware.accessProtection, OrderController);
         this.app.use('/api/models', middleware.accessProtection, ModelController);
+        this.app.get('*', (req, res) => {
+            res.sendFile(path.resolve(this.rootPath, 'client', 'material', 'build', 'index.html'))
+        });
     }
 }
 

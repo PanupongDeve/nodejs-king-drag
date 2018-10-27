@@ -3,6 +3,7 @@ const database = require('./database');
 const controllers = require('./controllers');
 const middlewares = require('./middlewares');
 
+
 module.exports = class App {
 
     constructor(config) {
