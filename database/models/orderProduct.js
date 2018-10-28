@@ -18,8 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         discount: {
             field: 'discount',
-            type: DataTypes.INTEGER(10),
-            allowNull: true
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: true,
+            validate: {
+                isDecimal: true
+            }
         },
         amount: {
             field: 'amount',

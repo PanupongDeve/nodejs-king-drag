@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         discountA: {
             field: 'discount_A',
             type: DataTypes.INTEGER(10),
-            allowNull: true
+            allowNull: false
         },
         discountB: {
             field: 'discount_B',
