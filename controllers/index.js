@@ -34,7 +34,7 @@ class Controller {
         this.app.use('/api/orders', middleware.accessProtection, OrderController);
         this.app.use('/api/models', middleware.accessProtection, ModelController);
         this.app.get('*', (req, res) => {
-            res.sendFile(path.resolve(this.rootPath, 'client', 'material', 'build', 'index.html'))
+            res.sendFile(path.resolve(this.rootPath, 'client', 'build', 'index.html'))
         });
     }
 }
