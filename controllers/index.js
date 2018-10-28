@@ -24,7 +24,7 @@ class Controller {
 
     initialController() {
         console.log('\x1b[31m', 'System:', '\x1b[37m', 'Initial Controller has been established successfully.');
-
+        console.log(this.rootPath);
         this.app.use('/api/authentication', AuthController);
         this.app.use('/api/users', middleware.accessProtection, UserController);
         this.app.use('/api/colors', middleware.accessProtection, ColorController);
