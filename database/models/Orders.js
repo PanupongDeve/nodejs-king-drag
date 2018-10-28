@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
                 isDecimal: true
             }
         },
+        discount: {
+            field: 'discount',
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: true,
+            validate: {
+                isDecimal: true
+            }
+        },
         tel: {
             field: 'tel',
             type: DataTypes.STRING(191),
