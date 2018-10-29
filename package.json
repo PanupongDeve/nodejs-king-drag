@@ -20,7 +20,7 @@
 		"sequelize": "^4.39.0"
 	},
 	"scripts": {
-		"start": "npm run deploy",
+		"start": "node index.js",
 		"dev": "nodemon index.js",
 		"server-delete": "rm -rf node_modules",
 		"server-install": "npm install",
