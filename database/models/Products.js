@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'color_id',
             type: DataTypes.INTEGER(10),
             allowNull: true,
+            defaultValue: null,
             validate: {
                 isInt: true
             }
@@ -35,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'size_id',
             type: DataTypes.INTEGER(10),
             allowNull: true,
+            defaultValue: null,
             validate: {
                 isInt: true
             }
@@ -42,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
         imagePath: {
             field: 'image_path',
             type: DataTypes.STRING(191),
-            allowNull: true
+            allowNull: true,
+            defaultValue: null
         },
         price: {
             field: 'price',
@@ -56,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'price_A',
             type: DataTypes.DECIMAL(10, 2),
             allowNull: true,
+            defaultValue: null,
             validate: {
                 isDecimal: true
             }
@@ -64,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'price_B',
             type: DataTypes.DECIMAL(10, 2),
             allowNull: true,
+            defaultValue: null,
             validate: {
                 isDecimal: true
             }
@@ -71,7 +76,8 @@ module.exports = (sequelize, DataTypes) => {
         remark: {
             field: 'remark',
             type: DataTypes.STRING(191),
-            allowNull: true
+            allowNull: true,
+            defaultValue: null
         },
         softDelete: {
             field: 'soft_delete',
