@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             field: 'title',
             type: DataTypes.STRING(191),
-            allowNull: true
+            allowNull: true,
+            defaultValue: null,
         },
         softDelete: {
             field: 'soft_delete',

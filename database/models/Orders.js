@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'discount',
             type: DataTypes.DECIMAL(10, 2),
             allowNull: true,
+            defaultValue: null,
             validate: {
                 isDecimal: true
             }
@@ -44,7 +45,8 @@ module.exports = (sequelize, DataTypes) => {
         tel: {
             field: 'tel',
             type: DataTypes.STRING(191),
-            allowNull: true
+            allowNull: true,
+            defaultValue: null,
         },
         filePath: {
             field: 'file_path',
