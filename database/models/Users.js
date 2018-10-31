@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
         tel: {
             field: 'tel',
             type: DataTypes.STRING(191),
-            allowNull: true
+            allowNull: true,
+            defaultValue: null,
         },
         group: {
             field: 'group',
