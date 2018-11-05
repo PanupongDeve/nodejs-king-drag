@@ -3,6 +3,7 @@ const router = express.Router();
 const modelPromise = require('../database').model;
 const response = require('../helpers/Response');
 const service = require('../helpers/Service');
+const middleware = require('../middlewares');
 
 class ModelController {
 
@@ -10,10 +11,10 @@ class ModelController {
         this.router = router;
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getById);
-        this.router.post('/', this.create);
-        this.router.patch('/:id', this.update);
-        this.router.delete('/soft/:id', this.softDelete);
-        this.router.delete('/:id', this.delete);
+        this.router.post('/', middleware.accessProtection, this.create);
+        this.router.patch('/:id', middleware.accessProtection, this.update);
+        this.router.delete('/soft/:id', middleware.accessProtection, this.softDelete);
+        this.router.delete('/:id', middleware.accessProtection, this.delete);
     }
 
     async getAll(req, res) {
