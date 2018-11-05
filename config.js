@@ -22,7 +22,7 @@ module.exports = class Config {
          * Get database host address
          */
         if (this.env === 'production') return this.address;
-        else return 'localhost';
+        else return '167.99.77.10';
     }
 
     getPort() {
@@ -30,7 +30,7 @@ module.exports = class Config {
          * Get port 
          */
         if (this.env === 'production') return this.port;
-        else return 3003;
+        else return 3000;
     }
 
     getUsername() {
@@ -38,7 +38,7 @@ module.exports = class Config {
          * Get username
          */
         if (this.env === 'production') return this.username;
-        else return 'root';
+        else return 'kingdrag';
     }
 
     getPassword() {
@@ -46,7 +46,7 @@ module.exports = class Config {
          * Get password 
          */
         if (this.env === 'production') return this.password;
-        else return 'password';
+        else return 'www.google.com';
     }
 
     getDatabase() {

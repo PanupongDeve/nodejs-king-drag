@@ -5,6 +5,7 @@ const path = require('path');
 const modelPromise = require('../database').model;
 const response = require('../helpers/Response');
 const service = require('../helpers/Service');
+const middleware = require('../middlewares');
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -23,11 +24,11 @@ class ProductController {
         this.router = router;
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getById);
-        this.router.post('/', this.create);
-        this.router.post('/upload', upload.single('image'), this.upload);
-        this.router.patch('/:id', this.update);
-        this.router.delete('/soft/:id', this.softDelete);
-        this.router.delete('/:id', this.delete);
+        this.router.post('/', middleware.accessProtection, this.create);
+        this.router.post('/upload', upload.single('image'), middleware.accessProtection, this.upload);
+        this.router.patch('/:id', middleware.accessProtection, this.update);
+        this.router.delete('/soft/:id', middleware.accessProtection, this.softDelete);
+        this.router.delete('/:id', middleware.accessProtection, this.delete);
     }
 
     async getAll(req, res) {
@@ -96,7 +97,7 @@ class ProductController {
     }
 
     async upload(req, res) {
-        let  { file } = req;
+        let { file } = req;
         file.path = file.path.substring(7); //  --> to cut /public
         if (!file) return await response.push(res, { status: 400, result: 'ต้องมีอย่างน้อย 1 ไฟล์' }, 401);
         return await response.push(res, { status: 200, result: '/' + file.path }, 200);
